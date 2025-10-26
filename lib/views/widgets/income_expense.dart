@@ -27,7 +27,7 @@ class IncomeExpence extends StatelessWidget {
             isIncome
                 ? Icons.keyboard_double_arrow_up
                 : Icons.keyboard_double_arrow_down,
-            color: isIncome ? greenClr : redClr,
+            color: isIncome ? greenClr : const Color.fromARGB(255, 220, 25, 25),
           ),
         ),
         SizedBox(
