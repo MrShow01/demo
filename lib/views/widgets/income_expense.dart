@@ -21,8 +21,8 @@ class IncomeExpence extends StatelessWidget {
         CircleAvatar(
           radius: 16.r,
           backgroundColor: isIncome
-              ? Colors.green.withOpacity(.3)
-              : Colors.red.withOpacity(.3),
+              ? Colors.green.withOpacity(.25)
+              : Colors.red.withOpacity(.25),
           child: Icon(
             isIncome
                 ? Icons.keyboard_double_arrow_up
