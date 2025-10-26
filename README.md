@@ -7,3 +7,4 @@ add auto transaction
 make easy transaction ui 
 extract to excel sheet 
 add hide balance  ## DONE
+# task
