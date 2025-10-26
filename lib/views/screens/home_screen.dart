@@ -46,10 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
       return Scaffold(
         // appBar: _appBar(),
         body: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: 20.w,
-            vertical: 12.h,
-          ),
+          padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 12.h),
           child: SafeArea(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,15 +92,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                   .map(
                                     (item) => DropdownMenuItem(
                                       value: item,
-                                      child: Text(
-                                        item.currency,
-                                      ),
+                                      child: Text(item.currency),
                                     ),
                                   )
                                   .toList(),
                               onChanged: (val) {
-                                _homeController
-                                    .updateSelectedCurrency((val as Currency));
+                                _homeController.updateSelectedCurrency(
+                                  (val as Currency),
+                                );
                               },
                               itemHeight: 30.h,
                               dropdownPadding: EdgeInsets.all(4),
@@ -112,12 +108,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
-                SizedBox(
-                  height: 8.h,
-                ),
+                SizedBox(height: 8.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -130,19 +124,22 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     IconButton(
-                        onPressed: () {
-                          _homeController.toggleBalanceShowHide();
-                        },
-                        icon: _homeController.showBalance.value
-                            ? SvgPicture.asset('assets/unlocked.svg',
-                                semanticsLabel: 'unlocked')
-                            : SvgPicture.asset('assets/locked.svg',
-                                semanticsLabel: 'locked'))
+                      onPressed: () {
+                        _homeController.toggleBalanceShowHide();
+                      },
+                      icon: _homeController.showBalance.value
+                          ? SvgPicture.asset(
+                              'assets/unlocked.svg',
+                              semanticsLabel: 'unlocked',
+                            )
+                          : SvgPicture.asset(
+                              'assets/locked.svg',
+                              semanticsLabel: 'locked',
+                            ),
+                    ),
                   ],
                 ),
-                SizedBox(
-                  height: 15.h,
-                ),
+                SizedBox(height: 15.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -158,9 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 15.h,
-                ),
+                SizedBox(height: 15.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -182,34 +177,33 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * .04.h,
-                ),
+                SizedBox(height: MediaQuery.of(context).size.height * .04.h),
                 _homeController.myTransactions.value.isEmpty
                     ? Container()
                     : Padding(
-                        padding: EdgeInsets.symmetric(
-                          vertical: 10.h,
-                        ),
+                        padding: EdgeInsets.symmetric(vertical: 10.h),
                         child: Visibility(
                           visible: _homeController.showBalance.value,
                           child: ListTile(
                             leading: CircleAvatar(
                               backgroundColor: Colors.transparent,
                               child: Center(
-                                  child: IconButton(
-                                      onPressed: () => _showDatePicker(context),
-                                      icon: Icon(
-                                        Icons.calendar_month,
-                                        color: Colors.grey,
-                                      ))),
+                                child: IconButton(
+                                  onPressed: () => _showDatePicker(context),
+                                  icon: Icon(
+                                    Icons.calendar_month,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ),
                             ),
                             title: Text(
                               _homeController.selectedDate.day ==
                                       DateTime.now().day
                                   ? 'Today'
-                                  : DateFormat.yMd()
-                                      .format(_homeController.selectedDate),
+                                  : DateFormat.yMd().format(
+                                      _homeController.selectedDate,
+                                    ),
                               style: TextStyle(
                                 fontSize: 16.sp,
                                 fontWeight: FontWeight.bold,
@@ -219,9 +213,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             trailing: Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                SizedBox(
-                                  height: 7.h,
-                                ),
+                                SizedBox(height: 7.h),
                                 Text(
                                   _homeController.totalForSelectedDate < 0
                                       ? 'You spent'
@@ -231,9 +223,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     color: Colors.grey,
                                   ),
                                 ),
-                                SizedBox(
-                                  height: 3.h,
-                                ),
+                                SizedBox(height: 3.h),
                                 Text(
                                   '${_homeController.selectedCurrency.symbol}${_homeController.totalForSelectedDate.toStringAsFixed(2)}',
                                   style: TextStyle(
@@ -251,8 +241,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     : Expanded(
                         child: Center(
                           child: SizedBox(
-                            child: SvgPicture.asset('assets/suspect.svg',
-                                semanticsLabel: 'unlocked'),
+                            child: SvgPicture.asset(
+                              'assets/suspect.svg',
+                              semanticsLabel: 'unlocked',
+                            ),
                           ),
                         ),
                       ),
@@ -276,9 +268,7 @@ class _HomeScreenState extends State<HomeScreen> {
             await Get.to(() => AddTransactionScreen());
             _homeController.getTransactions();
           },
-          child: Icon(
-            Icons.add,
-          ),
+          child: Icon(Icons.add),
         ),
       );
     });
@@ -286,10 +276,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   _showDatePicker(BuildContext context) async {
     DateTime? pickerDate = await showDatePicker(
-        context: context,
-        firstDate: DateTime(2012),
-        initialDate: DateTime.now(),
-        lastDate: DateTime(2122));
+      context: context,
+      firstDate: DateTime(2012),
+      initialDate: DateTime.now(),
+      lastDate: DateTime(2122),
+    );
     if (pickerDate != null) {
       _homeController.updateSelectedDate(pickerDate);
     }
@@ -301,9 +292,9 @@ class _HomeScreenState extends State<HomeScreen> {
         onPressed: () async {
           await _themeController.switchTheme();
         },
-        icon: Icon((_themeController.isDark.value)
-            ? Icons.nightlight
-            : Icons.wb_sunny),
+        icon: Icon(
+          (_themeController.isDark.value) ? Icons.nightlight : Icons.wb_sunny,
+        ),
         //color: _themeController.color,
       ),
       actions: [
@@ -337,9 +328,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       .map(
                         (item) => DropdownMenuItem(
                           value: item,
-                          child: Text(
-                            item.currency,
-                          ),
+                          child: Text(item.currency),
                         ),
                       )
                       .toList(),
@@ -353,7 +342,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ],
-        )
+        ),
       ],
     );
   }
