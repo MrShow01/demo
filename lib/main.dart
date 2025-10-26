@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           defaultTransition: Transition.rightToLeftWithFade,
           transitionDuration: Duration(milliseconds: 400),
-          title: 'Money Manager',
+          title: 'Money Manager [Mahmoud Emara]',
           theme: Themes.lightTheme,
           themeMode: SchedulerBinding.instance.window.platformBrightness ==
                   Brightness.dark
