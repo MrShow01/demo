@@ -7,7 +7,9 @@ import 'package:flutter_expense_tracker_app/views/screens/home_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+
 //Initial Commit
+// conmment added to change this file
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ScreenUtil.ensureScreenSize();
@@ -15,9 +17,7 @@ void main() async {
   await DatabaseProvider.initDb();
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  runApp(
-    MyApp(),
-  );
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -36,7 +36,8 @@ class MyApp extends StatelessWidget {
           transitionDuration: Duration(milliseconds: 400),
           title: 'Money Manager',
           theme: Themes.lightTheme,
-          themeMode: SchedulerBinding.instance.window.platformBrightness ==
+          themeMode:
+              SchedulerBinding.instance.window.platformBrightness ==
                   Brightness.dark
               ? ThemeMode.dark
               : ThemeMode.light,
